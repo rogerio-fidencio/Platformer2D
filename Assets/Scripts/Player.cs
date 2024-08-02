@@ -6,9 +6,13 @@ public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
 
-    public float speed = 5f;
+    public float walkSpeed = 5f;
+
+    public float runSpeed = 10f;
 
     public float jumpForce = 2f;
+
+    public float _currentSpeed;
 
     public Vector2 friction = new Vector2(0.1f, 0);
 
@@ -21,13 +25,26 @@ public class Player : MonoBehaviour
 
     private void handleMoviment()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _currentSpeed = runSpeed;
+        }
+        else
+        {
+            _currentSpeed = walkSpeed;
+        }
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            
+            rb.velocity = new Vector2(_currentSpeed, rb.velocity.y);
+           
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
+
+            rb.velocity = new Vector2(-_currentSpeed, rb.velocity.y);
+
         }
 
         if (rb.velocity.x > 0)
