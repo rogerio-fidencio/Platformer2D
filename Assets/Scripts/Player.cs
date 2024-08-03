@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public float animationDuration = 0.3f;
 
     private float _currentSpeed;
+    private bool _isJumping = false;
 
     void Update()
     {
@@ -71,6 +72,7 @@ public class Player : MonoBehaviour
             rb.transform.localScale = Vector2.one;
             DOTween.Kill(rb.transform);
             handleAnimation();
+            _isJumping = true;
         }
     }
 
@@ -82,7 +84,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        rb.transform.DOScaleY(landingScaleY, animationDuration).SetLoops(2, LoopType.Yoyo);
-        rb.transform.DOScaleX(landingScaleX, animationDuration).SetLoops(2, LoopType.Yoyo);
+        if (collision.gameObject.CompareTag("Ground") && _isJumping)
+        {
+            rb.transform.DOScaleY(landingScaleY, animationDuration).SetLoops(2, LoopType.Yoyo);
+            rb.transform.DOScaleX(landingScaleX, animationDuration).SetLoops(2, LoopType.Yoyo);
+            _isJumping = false;
+        }
     }
 }
