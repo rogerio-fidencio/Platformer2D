@@ -20,8 +20,16 @@ public class Player : MonoBehaviour
     public float landingScaleY = 0.5f;
     public float animationDuration = 0.3f;
 
+    [Header("Animator")]
+    public Animator animator;
+    public string boolRun = "Run";
+    public string boolJumpUp = "JumpUp";
+    public string boolJumpDown = "JumpDown";
+    public string boolLanding = "Landing";
+
     private float _currentSpeed;
     private bool _isJumping = false;
+    private int _currentDirection = 1;
 
     void Update()
     {
@@ -39,24 +47,44 @@ public class Player : MonoBehaviour
         else
         {
             _currentSpeed = walkSpeed;
+            animator.speed = 1;
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
             
             rb.velocity = new Vector2(_currentSpeed, rb.velocity.y);
-           
+            animator.SetBool(boolRun, true);
+            if (_currentSpeed == runSpeed) animator.speed = 2;
+            if (rb.transform.localScale.x != 1) 
+            {
+                rb.transform.DOScaleX(1, 0.1f);
+                _currentDirection = 1;
+            } 
+
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
 
             rb.velocity = new Vector2(-_currentSpeed, rb.velocity.y);
+            animator.SetBool(boolRun, true);
+            if (_currentSpeed == runSpeed) animator.speed = 2;
+            if (rb.transform.localScale.x != -1) 
+            {
+                rb.transform.DOScaleX(-1, 0.1f);
+                _currentDirection = -1;
+            }
 
+        }
+        else
+        {
+            animator.SetBool(boolRun, false);
         }
 
         if (rb.velocity.x > 0)
         {
             rb.velocity -= friction;
+            
         }
         else if (rb.velocity.x < 0)
         {
@@ -69,10 +97,24 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            rb.transform.localScale = Vector2.one;
+            rb.transform.localScale = new Vector2(_currentDirection, 1);
             DOTween.Kill(rb.transform);
             handleAnimation();
             _isJumping = true;
+            animator.SetBool(boolJumpUp, true);
+        }
+        if (rb.velocity.y > 0)
+        {
+            animator.SetBool(boolJumpUp, true);
+            animator.SetBool(boolJumpDown, false);
+        }
+        else if (rb.velocity.y < 0)
+        {
+            animator.SetBool(boolJumpUp, false);
+            animator.SetBool(boolJumpDown, true);
+        } else
+        {
+            animator.SetBool(boolLanding, true);
         }
     }
 
