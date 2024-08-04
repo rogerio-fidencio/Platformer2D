@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -13,13 +11,6 @@ public class Player : MonoBehaviour
     public float jumpForce = 2f;
     public Vector2 friction = new Vector2(0.1f, 0);
 
-    [Header("Animation Setup")]
-    public float jumpScaleX = 0.5f;
-    public float jumpScaleY = 1.5f;
-    public float landingScaleX = 1.5f;
-    public float landingScaleY = 0.5f;
-    public float animationDuration = 0.3f;
-
     [Header("Animator")]
     public Animator animator;
     public string boolRun = "Run";
@@ -28,8 +19,6 @@ public class Player : MonoBehaviour
     public string boolLanding = "Landing";
 
     private float _currentSpeed;
-    private bool _isJumping = false;
-    private int _currentDirection = 1;
 
     void Update()
     {
@@ -59,7 +48,6 @@ public class Player : MonoBehaviour
             if (rb.transform.localScale.x != 1) 
             {
                 rb.transform.DOScaleX(1, 0.1f);
-                _currentDirection = 1;
             } 
 
         }
@@ -72,7 +60,6 @@ public class Player : MonoBehaviour
             if (rb.transform.localScale.x != -1) 
             {
                 rb.transform.DOScaleX(-1, 0.1f);
-                _currentDirection = -1;
             }
 
         }
@@ -97,10 +84,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            rb.transform.localScale = new Vector2(_currentDirection, 1);
-            DOTween.Kill(rb.transform);
-            handleAnimation();
-            _isJumping = true;
             animator.SetBool(boolJumpUp, true);
         }
         if (rb.velocity.y > 0)
@@ -115,22 +98,6 @@ public class Player : MonoBehaviour
         } else
         {
             animator.SetBool(boolLanding, true);
-        }
-    }
-
-    private void handleAnimation()
-    {
-        rb.transform.DOScaleY(jumpScaleY, animationDuration).SetLoops(2, LoopType.Yoyo);
-        rb.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground") && _isJumping)
-        {
-            rb.transform.DOScaleY(landingScaleY, animationDuration).SetLoops(2, LoopType.Yoyo);
-            rb.transform.DOScaleX(landingScaleX, animationDuration).SetLoops(2, LoopType.Yoyo);
-            _isJumping = false;
         }
     }
 }
