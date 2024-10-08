@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class HealthBase : MonoBehaviour
 
     private bool _isDead = false;
     private int _currentHealth;
+
+    public Action OnDeath;
 
     private void Awake()
     {
@@ -25,7 +28,6 @@ public class HealthBase : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
-
         if (_currentHealth <= 0)
         {
             Die();
@@ -35,9 +37,10 @@ public class HealthBase : MonoBehaviour
     private void Die()
     {
         _isDead = true;
-        if (destroyOnDeath )
+        if (destroyOnDeath)
         {
             Destroy(gameObject, delayToDestroy);
         }
+        OnDeath?.Invoke();
     }   
 }
