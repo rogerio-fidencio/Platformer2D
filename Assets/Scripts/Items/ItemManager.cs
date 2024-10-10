@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,9 +9,11 @@ public class ItemManager : MonoBehaviour
 
     public static ItemManager Instance;
 
-    public TextMeshProUGUI coinText;
+    public SOInt coinCount;
 
-    public int coins = 0;
+    public Action coinCountChange;
+
+
 
     private void Awake()
     {
@@ -32,12 +35,12 @@ public class ItemManager : MonoBehaviour
 
     private void Reset()
     {
-        coins = 0;
+        coinCount.value = 0;
     }
 
     public void AddCoin(int amount = 1)
     {
-        coins += amount;
-        coinText.text = "X " + coins.ToString();
+        coinCount.value += amount;
+        coinCountChange?.Invoke();
     }
 }

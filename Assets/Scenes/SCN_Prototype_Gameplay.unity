@@ -3651,6 +3651,7 @@ GameObject:
   - component: {fileID: 1657114534}
   - component: {fileID: 1657114536}
   - component: {fileID: 1657114535}
+  - component: {fileID: 1657114537}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3674,7 +3675,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 86.1, y: 0}
+  m_AnchoredPosition: {x: 130.9, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657114535
@@ -3731,7 +3732,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3774,6 +3775,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657114533}
   m_CullTransparentMesh: 1
+--- !u!114 &1657114537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657114533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e43ae38641eb74ea59fb01c07c46a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemManager: {fileID: 2026505201}
+  SOInt: {fileID: 11400000, guid: 2149fa07e4086244f9a1d2a1bbc17580, type: 2}
+  coinIntText: {fileID: 1657114535}
 --- !u!1 &1669977352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4697,7 +4713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 1657114535}
-  coins: 0
+  coinCount: {fileID: 11400000, guid: 2149fa07e4086244f9a1d2a1bbc17580, type: 2}
 --- !u!4 &2026505202
 Transform:
   m_ObjectHideFlags: 0
