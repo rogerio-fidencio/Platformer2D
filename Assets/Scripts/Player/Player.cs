@@ -5,20 +5,16 @@ public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
 
-    [Header("Speed Setup")]
-    public float walkSpeed = 5f;
-    public float runSpeed = 10f;
-    public float jumpForce = 2f;
-    public Vector2 friction = new Vector2(0.1f, 0);
-
-    [Header("Animator")]
-    public Animator animator;
-    public string boolRun = "Run";
-    public string boolJumpUp = "JumpUp";
-    public string boolJumpDown = "JumpDown";
-    public string boolLanding = "Landing";
+    public SOPlayerSetup soPlayerSetup;
 
     private float _currentSpeed;
+
+    private Animator _currentAnimator;
+
+    private void Awake()
+    {
+        _currentAnimator = Instantiate(soPlayerSetup.animator, rb.transform);
+    }
 
     void Update()
     {
@@ -31,20 +27,20 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            _currentSpeed = runSpeed;
+            _currentSpeed = soPlayerSetup.runSpeed;
         }
         else
         {
-            _currentSpeed = walkSpeed;
-            animator.speed = 1;
+            _currentSpeed = soPlayerSetup.walkSpeed;
+            _currentAnimator.speed = 1;
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
             
             rb.velocity = new Vector2(_currentSpeed, rb.velocity.y);
-            animator.SetBool(boolRun, true);
-            if (_currentSpeed == runSpeed) animator.speed = 2;
+            _currentAnimator.SetBool(soPlayerSetup.boolRun, true);
+            if (_currentSpeed == soPlayerSetup.runSpeed) _currentAnimator.speed = 2;
             if (rb.transform.localScale.x != 1) 
             {
                 rb.transform.DOScaleX(1, 0.1f);
@@ -55,8 +51,8 @@ public class Player : MonoBehaviour
         {
 
             rb.velocity = new Vector2(-_currentSpeed, rb.velocity.y);
-            animator.SetBool(boolRun, true);
-            if (_currentSpeed == runSpeed) animator.speed = 2;
+            _currentAnimator.SetBool(soPlayerSetup.boolRun, true);
+            if (_currentSpeed == soPlayerSetup.runSpeed) _currentAnimator.speed = 2;
             if (rb.transform.localScale.x != -1) 
             {
                 rb.transform.DOScaleX(-1, 0.1f);
@@ -65,17 +61,17 @@ public class Player : MonoBehaviour
         }
         else
         {
-            animator.SetBool(boolRun, false);
+            _currentAnimator.SetBool(soPlayerSetup.boolRun, false);
         }
 
         if (rb.velocity.x > 0)
         {
-            rb.velocity -= friction;
+            rb.velocity -= soPlayerSetup.friction;
             
         }
         else if (rb.velocity.x < 0)
         {
-            rb.velocity += friction;
+            rb.velocity += soPlayerSetup.friction;
         }
     }
 
@@ -83,21 +79,21 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            animator.SetBool(boolJumpUp, true);
+            rb.velocity = new Vector2(rb.velocity.x, soPlayerSetup.jumpForce);
+            _currentAnimator.SetBool(soPlayerSetup.boolJumpUp, true);
         }
         if (rb.velocity.y > 0)
         {
-            animator.SetBool(boolJumpUp, true);
-            animator.SetBool(boolJumpDown, false);
+            _currentAnimator.SetBool(soPlayerSetup.boolJumpUp, true);
+            _currentAnimator.SetBool(soPlayerSetup.boolJumpDown, false);
         }
         else if (rb.velocity.y < 0)
         {
-            animator.SetBool(boolJumpUp, false);
-            animator.SetBool(boolJumpDown, true);
+            _currentAnimator.SetBool(soPlayerSetup.boolJumpUp, false);
+            _currentAnimator.SetBool(soPlayerSetup.boolJumpDown, true);
         } else
         {
-            animator.SetBool(boolLanding, true);
+            _currentAnimator.SetBool(soPlayerSetup.boolLanding, true);
         }
     }
 }
