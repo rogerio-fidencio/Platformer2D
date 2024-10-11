@@ -17,7 +17,6 @@ public class ItemCollectibleBase : MonoBehaviour
 
     protected virtual void Collect()
     {
-        Debug.Log("Collected");
         OnCollected();
         Destroy(gameObject);
     }
