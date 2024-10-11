@@ -805,11 +805,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &458697939 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6413013834153556191, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
-  m_PrefabInstance: {fileID: 1204396824}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &458697940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8007466312498025151, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
@@ -1425,15 +1420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 664884998}
-  walkSpeed: 10
-  runSpeed: 15
-  jumpForce: 15
-  friction: {x: 0.3, y: 0}
-  animator: {fileID: 458697939}
-  boolRun: Run
-  boolJumpUp: JumpUp
-  boolJumpDown: JumpDown
-  boolLanding: Landing
+  soPlayerSetup: {fileID: 11400000, guid: 732c7780f0acbd445ac1974bd0f1d726, type: 2}
 --- !u!50 &664884998
 Rigidbody2D:
   serializedVersion: 4
@@ -2818,6 +2805,10 @@ PrefabInstance:
     - target: {fileID: 8835229685202505509, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
       propertyPath: m_Name
       value: PFB_Astronaut
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835229685202505509, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9025240814598423278, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4712,7 +4703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b08e4d3ff4b3b504b931c631f6f98751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinText: {fileID: 1657114535}
   coinCount: {fileID: 11400000, guid: 2149fa07e4086244f9a1d2a1bbc17580, type: 2}
 --- !u!4 &2026505202
 Transform:
