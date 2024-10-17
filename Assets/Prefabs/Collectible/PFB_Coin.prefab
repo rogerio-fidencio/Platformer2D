@@ -95,9 +95,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492721954884867573}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingLayerID: -1739699709
+  m_SortingLayer: 1
+  m_SortingOrder: 16
   m_SortAtRoot: 0
 --- !u!1 &4384132363537521093
 GameObject:
@@ -202,10 +202,6 @@ PrefabInstance:
     - target: {fileID: 7281297632632926839, guid: 13c9a858161e8074dba11902b759a652, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 7281297632632926839, guid: 13c9a858161e8074dba11902b759a652, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7281297632632926839, guid: 13c9a858161e8074dba11902b759a652, type: 3}
       propertyPath: m_LocalRotation.w
