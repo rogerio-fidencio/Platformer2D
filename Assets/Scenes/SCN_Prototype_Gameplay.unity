@@ -2346,6 +2346,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 632057434584128501, guid: 70e59ab495b3ba24a8cc24136beb34db, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1492721954884867573, guid: 70e59ab495b3ba24a8cc24136beb34db, type: 3}
       propertyPath: m_Name
       value: PFB_Coin (1)
