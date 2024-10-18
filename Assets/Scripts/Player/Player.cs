@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [Header("Jump Colision Check")]
     [SerializeField] private Collider2D collider2D;
     [SerializeField] private float spaceToGround = 0.1f;
+    [SerializeField] private ParticleSystem jumpEffect;
     private float distanceToGround;
 
     private float _currentSpeed;
@@ -93,6 +94,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, soPlayerSetup.jumpForce);
+            PlayJumpVFX();
             _currentAnimator.SetBool(soPlayerSetup.boolJumpUp, true);
         }
         if (rb.velocity.y > 0)
@@ -108,5 +110,10 @@ public class Player : MonoBehaviour
         {
             _currentAnimator.SetBool(soPlayerSetup.boolLanding, true);
         }
+    }
+
+    private void PlayJumpVFX()
+    {
+        if (jumpEffect != null) jumpEffect.Play();
     }
 }

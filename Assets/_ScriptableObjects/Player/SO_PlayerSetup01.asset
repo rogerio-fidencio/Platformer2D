@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 12
   runSpeed: 21
-  jumpForce: 25
+  jumpForce: 15
   friction: {x: 0.1, y: 0}
   boolRun: Run
   boolJumpUp: JumpUp
