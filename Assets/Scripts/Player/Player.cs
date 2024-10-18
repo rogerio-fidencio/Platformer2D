@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     [Header("Jump Colision Check")]
     [SerializeField] private Collider2D collider2D;
     [SerializeField] private float spaceToGround = 0.1f;
-    [SerializeField] private ParticleSystem jumpEffect;
     private float distanceToGround;
 
     private float _currentSpeed;
@@ -114,6 +113,6 @@ public class Player : MonoBehaviour
 
     private void PlayJumpVFX()
     {
-        if (jumpEffect != null) jumpEffect.Play();
+        VFXManager.Instance.PlayVFXByType(VFXManager.VFXType.JUMP, transform.position);
     }
 }
