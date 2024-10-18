@@ -3,9 +3,14 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
-    public SOPlayerSetup soPlayerSetup;
+    [SerializeField] private SOPlayerSetup soPlayerSetup;
+
+    [Header("Jump Colision Check")]
+    [SerializeField] private Collider2D collider2D;
+    [SerializeField] private float spaceToGround = 0.1f;
+    private float distanceToGround;
 
     private float _currentSpeed;
 
@@ -14,11 +19,19 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _currentAnimator = Instantiate(soPlayerSetup.animator, rb.transform);
+        if (collider2D != null) 
+        {
+            distanceToGround = collider2D.bounds.extents.y;
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics2D.Raycast(transform.position, Vector2.down, distanceToGround + spaceToGround);
     }
 
     void Update()
     {
-            
         handleMoviment();
         handleJump();
     }
@@ -77,7 +90,7 @@ public class Player : MonoBehaviour
 
     private void handleJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, soPlayerSetup.jumpForce);
             _currentAnimator.SetBool(soPlayerSetup.boolJumpUp, true);
