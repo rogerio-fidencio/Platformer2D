@@ -5,11 +5,14 @@ using UnityEngine;
 public class ItemCollectibleBase : MonoBehaviour
 {
 
-    public string tagToCompare = "Player";
+    [SerializeField] private string tagToCompare = "Player";
 
-    public ParticleSystem colectEffect;
-    public float timeToHide = 3f;
-    public GameObject graphicItem;
+    [SerializeField] private ParticleSystem colectEffect;
+    [SerializeField] private float timeToHide = 3f;
+    [SerializeField] private GameObject graphicItem;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioSource collectSoundSource;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,5 +37,6 @@ public class ItemCollectibleBase : MonoBehaviour
     protected virtual void OnCollected()
     {
         if (colectEffect != null) colectEffect.Play();
+        if (collectSoundSource != null) collectSoundSource.Play();
     }
 }
