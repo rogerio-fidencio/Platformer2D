@@ -15,7 +15,7 @@ public class SOUICoinCountUpdate : MonoBehaviour
         itemManager.coinCountChange += UpdateUI;
     }
 
-    private void UpdateUI()
+   public void UpdateUI()
     {
         coinCountIntText.text = "X " + itemManager.coinCount.value.ToString();
     }
