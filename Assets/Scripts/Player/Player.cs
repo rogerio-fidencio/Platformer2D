@@ -10,10 +10,12 @@ public class Player : MonoBehaviour
     [Header("Jump Colision Check")]
     [SerializeField] private Collider2D collider2D;
     [SerializeField] private float spaceToGround = 0.1f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioPlayHelper jumpAudioPlayHelper;
+
     private float distanceToGround;
-
     private float _currentSpeed;
-
     private Animator _currentAnimator;
 
     private void Awake()
@@ -94,6 +96,7 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, soPlayerSetup.jumpForce);
             PlayJumpVFX();
+            jumpAudioPlayHelper.PlayAudio();
             _currentAnimator.SetBool(soPlayerSetup.boolJumpUp, true);
         }
         if (rb.velocity.y > 0)

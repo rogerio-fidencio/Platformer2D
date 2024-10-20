@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a158640e52b71242af4ab6b3292526d, type: 3}
   m_Name: SOInt_Coins
   m_EditorClassIdentifier: 
-  value: 5
+  value: 6
