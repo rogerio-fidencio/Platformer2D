@@ -1,6 +1,6 @@
 # Platformer2D
 
-## Primeira DEMO de jogo de plataforma 2D desenvolvido durante o cruso de Unity da EBAC
+## Primeira DEMO de jogo de plataforma 2D desenvolvido durante o curso de Unity da EBAC
 Features:
  - Controle de cena com menu inicial e tela de jogo.
  - Player com atributos como velocidade, altura do pulo e vida atribuídos via Scriptable Object.
